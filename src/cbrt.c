@@ -30,6 +30,49 @@ uq5_27_t cbrt_non_optimized(uq5_27_t M_norm) {
 }
 
 uq5_27_t cbrt_optimized(uq5_27_t M_norm) {
-    // Replace with actual optimized cube root function
-    return cbrt_non_optimized(M_norm);
+    register uq5_27_t f = UQ5_27_ONE;
+    register uq5_27_t f_cbrt = UQ5_27_ONE;
+    register uint32_t mask = 0;
+    register uint32_t j;
+
+    register uq5_27_t mu;
+    register uq5_27_t mu_cbrt;
+
+    for (int i = 0; i < UQ5_27_FBITS; i += 3) {
+        mu = f + ((f + mask) >> i);
+        mu = mu + ((mu + mask) >> i);
+        mu = mu + ((mu + mask) >> i);
+        mu_cbrt = f_cbrt + ((f_cbrt + mask) >> i);
+        if (mu <= M_norm) {
+            f = mu;
+            f_cbrt = mu_cbrt;
+        }
+        mask = (mask << 1) | 1;
+
+        j = i + 1;
+
+        mu = f + ((f + mask) >> j);
+        mu = mu + ((mu + mask) >> j);
+        mu = mu + ((mu + mask) >> j);
+        mu_cbrt = f_cbrt + ((f_cbrt + mask) >> j);
+        if (mu <= M_norm) {
+            f = mu;
+            f_cbrt = mu_cbrt;
+        }
+        mask = (mask << 1) | 1;
+
+        j++;
+
+        mu = f + ((f + mask) >> j);
+        mu = mu + ((mu + mask) >> j);
+        mu = mu + ((mu + mask) >> j);
+        mu_cbrt = f_cbrt + ((f_cbrt + mask) >> j);
+        if (mu <= M_norm) {
+            f = mu;
+            f_cbrt = mu_cbrt;
+        }
+        mask = (mask << 1) | 1;
+    }
+
+    return f_cbrt;
 }
