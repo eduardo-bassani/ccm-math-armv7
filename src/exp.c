@@ -27,6 +27,39 @@ q2_30_t exp2_non_optimized(q2_30_t M_norm) {
 }
 
 q2_30_t exp2_optimized(q2_30_t M_norm) {
-    // Replace with actual optimized exp2 function
-    return exp2_non_optimized(M_norm);
+    register q2_30_t M = M_norm;
+    register q2_30_t f = Q2_30_ONE;
+    register const q2_30_t *tab = log2_tab;
+    register uint32_t mask = 0;
+
+    register q2_30_t mu;
+    register q2_30_t phi;
+
+    for (int i = 0; i < Q2_30_FBITS; i += 3) {
+        mu = M - *tab++;
+        phi = f + ((f + mask) >> i);
+        if (mu >= 0) {
+            M = mu;
+            f = phi;
+        }
+        mask = (mask << 1) | 1;
+
+        mu = M - *tab++;
+        phi = f + ((f + mask) >> (i + 1));
+        if (mu >= 0) {
+            M = mu;
+            f = phi;
+        }
+        mask = (mask << 1) | 1;
+
+        mu = M - *tab++;
+        phi = f + ((f + mask) >> (i + 2));
+        if (mu >= 0) {
+            M = mu;
+            f = phi;
+        }
+        mask = (mask << 1) | 1;
+    }
+
+    return f;
 }
