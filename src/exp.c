@@ -35,7 +35,7 @@ q2_30_t exp2_optimized(q2_30_t M_norm) {
     register q2_30_t mu;
     register q2_30_t phi;
 
-    for (int i = 0; i < Q2_30_FBITS; i += 3) {
+    for (register int i = 0; i < Q2_30_FBITS; i += 3) {
         mu = M - *tab++;
         phi = f + ((f + mask) >> i);
         if (mu >= 0) {

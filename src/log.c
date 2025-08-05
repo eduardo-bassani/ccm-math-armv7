@@ -35,7 +35,7 @@ q2_30_t log2_optimized(q2_30_t M_norm) {
     register q2_30_t mu;
     register q2_30_t phi;
   
-    for (int i = 0; i < Q2_30_FBITS; i += 3) {
+    for (register int i = 0; i < Q2_30_FBITS; i += 3) {
         mu  = M + ((M + mask) >> i);
         phi = f - *tab++;
         if (mu <= Q2_30_ONE) {

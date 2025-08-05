@@ -42,7 +42,7 @@ uq4_28_t sqrt_optimized(uq4_28_t M_norm) {
         f_sqrt = mu_sqrt;
     }
 
-    for (int i = 1; i < UQ4_28_FBITS; i += 3) {
+    for (register int i = 1; i < UQ4_28_FBITS; i += 3) {
         mu = f + ((f + mask) >> i);
         mu = mu + ((mu + mask) >> i);
         mu_sqrt = f_sqrt + ((f_sqrt + mask) >> i);

@@ -38,7 +38,7 @@ uq5_27_t cbrt_optimized(uq5_27_t M_norm) {
     register uq5_27_t mu;
     register uq5_27_t mu_cbrt;
 
-    for (int i = 0; i < UQ5_27_FBITS; i += 3) {
+    for (register int i = 0; i < UQ5_27_FBITS; i += 3) {
         mu = f + ((f + mask) >> i);
         mu = mu + ((mu + mask) >> i);
         mu = mu + ((mu + mask) >> i);
