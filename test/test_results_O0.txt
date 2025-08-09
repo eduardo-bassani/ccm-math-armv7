@@ -1,0 +1,102 @@
+============================================
+= Fixed-Point Math Function Testbench      =
+= Timing runs per input: 100000           =
+============================================
+
+--- Testing log2() Implementations ---
+Input Format: Q2.30 for custom, double for C standard
+
+1. Standard C log2() (double):
+  Avg. Time: 1.356475e-07 s
+
+2. Custom Fixed-Point log2_non_optimized():
+  Avg. Time: 3.376531e-07 s
+  Max Error: 2.566148e-09
+  MAE      : 1.137015e-09
+  RMSE     : 1.394051e-09
+
+3. Custom Fixed-Point log2_optimized():
+  Avg. Time: 1.263000e-07 s
+  Max Error: 8.313117e-09
+  MAE      : 3.545866e-09
+  RMSE     : 4.111934e-09
+
+--- Performance Analysis ---
+  Optimized vs. Non-Optimized: 2.67x speedup
+  Non-Optimized vs. C Library: 0.40x speedup
+  Optimized vs. C Library:     1.07x speedup
+--------------------------------------------
+
+--- Testing exp2() Implementations ---
+Input Format: Q2.30 for custom, double for C standard
+
+1. Standard C exp2() (double):
+  Avg. Time: 2.799288e-07 s
+
+2. Custom Fixed-Point exp2_non_optimized():
+  Avg. Time: 3.352044e-07 s
+  Max Error: 3.875694e-09
+  MAE      : 1.526405e-09
+  RMSE     : 1.926891e-09
+
+3. Custom Fixed-Point exp2_optimized():
+  Avg. Time: 1.222550e-07 s
+  Max Error: 4.556943e-09
+  MAE      : 2.131167e-09
+  RMSE     : 2.476530e-09
+
+--- Performance Analysis ---
+  Optimized vs. Non-Optimized: 2.74x speedup
+  Non-Optimized vs. C Library: 0.84x speedup
+  Optimized vs. C Library:     2.29x speedup
+--------------------------------------------
+
+--- Testing sqrt() Implementations ---
+Input Format: UQ4.28 for custom, double for C standard
+
+1. Standard C sqrt() (double):
+  Avg. Time: 7.487187e-08 s
+
+2. Custom Fixed-Point sqrt_non_optimized():
+  Avg. Time: 4.684794e-07 s
+  Max Error: 1.321671e-08
+  MAE      : 5.877173e-09
+  RMSE     : 7.088368e-09
+
+3. Custom Fixed-Point sqrt_optimized():
+  Avg. Time: 1.184594e-07 s
+  Max Error: 1.321671e-08
+  MAE      : 5.877173e-09
+  RMSE     : 7.088368e-09
+
+--- Performance Analysis ---
+  Optimized vs. Non-Optimized: 3.95x speedup
+  Non-Optimized vs. C Library: 0.16x speedup
+  Optimized vs. C Library:     0.63x speedup
+--------------------------------------------
+
+--- Testing cbrt() Implementations ---
+Input Format: UQ5.27 for custom, double for C standard
+
+1. Standard C cbrt() (double):
+  Avg. Time: 3.774825e-07 s
+
+2. Custom Fixed-Point cbrt_non_optimized():
+  Avg. Time: 5.191850e-07 s
+  Max Error: 2.645114e-08
+  MAE      : 1.145755e-08
+  RMSE     : 1.433907e-08
+
+3. Custom Fixed-Point cbrt_optimized():
+  Avg. Time: 1.337425e-07 s
+  Max Error: 1.703820e-08
+  MAE      : 8.068383e-09
+  RMSE     : 9.677447e-09
+
+--- Performance Analysis ---
+  Optimized vs. Non-Optimized: 3.88x speedup
+  Non-Optimized vs. C Library: 0.73x speedup
+  Optimized vs. C Library:     2.82x speedup
+--------------------------------------------
+
+Testbench finished.
